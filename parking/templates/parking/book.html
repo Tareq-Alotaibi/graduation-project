@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'parking/style.css' %}" />
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="my-5"></div>
+    <div class="container">
+        <div class="row">
+            <form action="{% url 'book' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Car Number</label>
+                    <input class="form-control" type="text" id="car_number" name="car_number" placeholder="450872115"
+                         required />
+                    <div class="form-group">
+                        <label for="phone">Your Phone</label>
+                        <input class="form-control" type="tel" id="phone" name="phone_number"
+                            placeholder="498-348-3872" required />
+                    </div>
+                    <div class="form-group inlined">
+                        <label for="checkin-date">Date</label>
+                        <input class="form-control" type="date" id="date" name="date"
+                            required />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group inlined">
+                                <label for="checkin-date">Checkin</label>
+                                <input class="form-control" type="time" step="1" id="checkin-date" name="checkin"
+                                    required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group inlined">
+                                <label for="checkout-date">Checkout</label>
+                                <input 
+                                    class="form-control" 
+                                    type="time" 
+                                    step="1" 
+                                    id="checkout-date" 
+                                    name="checkout"
+                                    required />
+                            </div>
+                        </div>
+                    </div>
+                    <select name="parking" class="my-3 form-select" aria-label="Default select example">
+                        <option selected>Select Parking</option>
+                        {% for parking in parkings %}
+                            {% if parking.is_available %}
+                                <option value="{{ parking.number }}">{{ parking.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

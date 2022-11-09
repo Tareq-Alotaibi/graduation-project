@@ -15,7 +15,8 @@ time_slots = [
 
 
 class Parking(models.Model):
-    number = models.IntegerField()
+    name = models.CharField(max_length=255, null=True)
+    number = models.IntegerField(null=True, unique=True)
     is_available = models.BooleanField(default=True, null=True)
 
     def __str__(self) -> str:
@@ -28,8 +29,8 @@ class Reservation(models.Model):
     car_number = models.CharField(max_length=255, null=True, blank=True)
     phone_number = models.CharField(null=True, max_length=60)
     date = models.DateField(null=True, blank=True)
-    time_from = models.TimeField(null=True, blank=True)
-    time_to = models.TimeField(null=True, blank=True)
+    checkin = models.TimeField(null=True, blank=True)
+    checkout = models.TimeField(null=True, blank=True)
 
     def __str__(self) -> str:
         return f"Car number {self.car_number}, {self.parking}"
