@@ -4,5 +4,5 @@ from parking import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('book/', views.BookingView.as_view(), name="book"),
+    path('', views.BookingView.as_view(), name="home"),
 ]

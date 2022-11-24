@@ -1,0 +1,260 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'parking/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'parking/normalize.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Smart parking based on Iot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+</head>
+
+<body>
+    <!-- Start Header -->
+    <div class="header">
+        <div class="container">
+            <i style="width: 60px;" class="fa-solid fa-square-parking fa-3x "></i>
+            <!-- <img class="logo" src="../pictures/koko.jpg" alt="" /> -->
+            <div class="links">
+                <span class="icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+                <ul>
+                    <li><a href="#ProjectFeatures">ProjectFeatures</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#reserve">Reserve</a></li>
+                    <li><a href="#abstract">abstract</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End Header -->
+    <!-- Start Landing Section -->
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <strong>Success!</strong> {{message}}.
+        </div>
+        {% endfor %}
+
+    {% endif %}
+
+    <div class="landing">
+        <div class="intro-text">
+            <h1>Parking system reservation</h1>
+            <p>You can find the available parkings and reserve whats suitable for you</p>
+        </div>
+    </div>
+    <!-- End Landing Section -->
+    <!-- Start Features -->
+    <div class="features">
+        <div class="features-cards container">
+            <div class="feat">
+                <i class="fas fa-magic fa-3x"></i>
+                <h3>HUP stand for</h3>
+                <p>Hashemite University Parking</p>
+            </div>
+            <div class="feat">
+                <i class="far fa-gem fa-3x"></i>
+                <h3>Why HUP is Right for Your lifestyle</h3>
+                <p>HUP helps of people easily find and pay for parking on their mobile devices. People can use HUP
+                    solutions to pay for
+                    garage parking quickly. Additionally, HUP offers parking reservations for concerts, sporting events,
+                    airports, campuses
+                    and more</p>
+            </div>
+            <div class="feat">
+                <i class="fas fa-globe-asia fa-3x"></i>
+                <h3>The Smarter Way to Parking Worldwide</h3>
+                <p>HUP puts the power to park in your hands. Whether you're looking for a spot now or reserving a spot
+                    for later,
+                    eventually HUP will eventually cover every reservation worldwide</p>
+            </div>
+        </div>
+    </div>
+    <!-- End Features -->
+    <!-- Start ProjectFeatures -->
+    <div class="ProjectFeatures" id="ProjectFeatures">
+        <div class="container">
+            <h2 class="special-heading">Project Features</h2>
+            <p> ProjectFeatures </p>
+            <div class="ProjectFeatures-content">
+                <div class="col">
+                    <!-- Start ProjectFeatures -->
+                    <div class="srv">
+                        <i class="fas fa-palette fa-2x"></i>
+                        <div class="text">
+                            <h3>The parking is smart</h3>
+                            <p>
+                                a parking strategy that combines technology and human innovation in an effort to use as
+                                few resources as possible—such
+                                as fuel, time and space to achieve faster, easier and denser parking of vehicles
+                            </p>
+                        </div>
+                    </div>
+                    <div class="srv">
+                            <i class="fab fa-sketch fa-2x"></i>
+                        <div class="text">
+                            <h3>Dashboard</h3>
+                            <p>
+                                Here you can define the parkings and see your clinet reservations
+                            </p>
+                        </div>
+                    </div>
+                    <!-- End ProjectFeatures -->
+                </div>
+                <div class="col">
+                    <!-- Start ProjectFeatures -->
+                    <div class="srv">
+                        <i class="fas fa-vector-square fa-2x"></i>
+                        <div class="text">
+                            <h3>Landing Page</h3>
+                            <p>
+                                Here your client can see the features, and reserve a parking in your system
+                            </p>
+                        </div>
+                    </div>
+                    <div class="srv">
+                        <i class="fas fa-pencil-ruler fa-2x"></i>
+                        <div class="text">
+                            <h3>Node Red technology</h3>
+                            <p>a programming tool for wiring together hardware devices, APIs and online services in new
+                                and interesting ways </p>
+                        </div>
+                    </div>
+                    <!-- End ProjectFeatures -->
+                </div>
+                <div class="col">
+                    <div class="image image-column">
+                        <img src="{% static '/parking/pictures/p2.jpg' %}" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End ProjectFeatures -->
+    <!-- Start Portfolio -->
+    <div class="my-5"></div>
+    <div class="ProjectFeatures" id="reserve">
+        <div class="container">
+            <h2 class="special-heading">Booking</h2>
+            <p> Reserve your parking </p>
+            <div class="row">
+                <form action="{% url 'home' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Car Number</label>
+                        <input class="form-control" type="text" id="car_number" name="car_number" placeholder="450872115"
+                            required />
+                        <div class="form-group">
+                            <label for="phone">Your Phone</label>
+                            <input class="form-control" type="tel" id="phone" name="phone_number" placeholder="498-348-3872"
+                                required />
+                        </div>
+                        <div class="form-group inlined">
+                            <label for="checkin-date">Date</label>
+                            <input class="form-control" type="date" id="date" name="date" required />
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group inlined">
+                                    <label for="checkin-date">Checkin</label>
+                                    <input class="form-control" type="time" step="1" id="checkin-date" name="checkin" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group inlined">
+                                    <label for="checkout-date">Checkout</label>
+                                    <input class="form-control" type="time" step="1" id="checkout-date" name="checkout" required />
+                                </div>
+                            </div>
+                        </div>
+                        <select name="parking" class="my-3 form-select" aria-label="Default select example">
+                            <option selected>Select Parking</option>
+                            {% for parking in parkings %}
+                            {% if parking.is_available %}
+                            <option value="{{ parking.number }}">{{ parking.name }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            
+            </div>
+        </div>
+    </div>
+    <!-- End Portfolio -->
+    <!-- Start abstract -->
+    <div class="abstract" id="abstract">
+        <div class="container">
+            <h2 class="special-heading">Abstract</h2>
+            <!-- <p>Less is more work</p> -->
+            <div class="abstract-content">
+                <div class="image">
+                    <img src="images/about.jpg" alt="" />
+                </div>
+                <div class="text">
+                    <p>
+                        The high population growth caused an increase in the number of vehicles, which led to congestion
+                        in the streets, making
+                        it difficult to find a place to park, especially in crowded cities. The project aims to present
+                        a proposal on parking
+                        problems that lead to increased carbon emissions. Smart parking is one such solution; It can be
+                        said that it is a way to
+                        make drivers better find their parking spaces through information and communication technology.
+                    </p>
+                    <hr>
+                    <p>
+                        The researchers reviewed many Literature Review that talked about the problem, which were
+                        collected from several specialized scientific sites
+                        such as Google Scholar, Scopus, and EBSCO. The project is divided into three chapters: the first
+                        is an introduction, the
+                        second is a review of past studies, and the third is the smart parking system design. Through
+                        the management and
+                        arrangement of these parking lots, the smart auto parking system helped to solve the problem of
+                        finding parking spaces.
+                        During the process of looking for available parking places, this initiative saves time and
+                        effort.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End abstract -->
+    <!-- Start Contact -->
+    <div class="contact" id="contact">
+        <div class="container">
+            <h2 class="special-heading">contact us</h2>
+            <p>Visit the HUP Help Center for answers to questions about account setup, billing & app support/p>
+            <div class="info">
+                <p class="label">Feel free to drop us a line at:</p>
+                <a href="mailto:tareqalotaibi1@gmail.com?subject=Contact" class="link">tareqalotaibi1@gmail.com</a>
+                <!-- <div class="social">
+                    Find Us On Social Networks
+                    <i class="fab fa-youtube"></i>
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- End Contact -->
+    <!-- Start Footer -->
+    <div class="footer">&copy; 2022 <span>HUP</span> All Right Reserved</div>
+    <!-- End Footer -->
+</body>
+
+
+</html>

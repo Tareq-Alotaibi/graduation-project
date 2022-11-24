@@ -5,6 +5,8 @@ from parking.form import ReservationForm
 from parking.models import Parking
 # Create your views here.
 
+from django.contrib import messages
+
 
 class BookingView(View):
 
@@ -15,12 +17,13 @@ class BookingView(View):
             "parkings": parkings,
         }
 
-        return render(request, "parking/book.html", context)
+        return render(request, "parking/index.html", context)
 
-    def post(self, request):
+    def post(self, request):            
         get = request.POST.get
 
         form = ReservationForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect("book")
+            messages.success(request, message="You have successfully reserved your parking")
+        return redirect("home")
