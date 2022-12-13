@@ -8,6 +8,12 @@ from parking.models import Parking
 from django.contrib import messages
 
 
+class HomeView(View):
+
+    def get(self, request):
+        return render(request, "parking/index.html")
+
+
 class BookingView(View):
 
     def get(self, request):
@@ -17,13 +23,11 @@ class BookingView(View):
             "parkings": parkings,
         }
 
-        return render(request, "parking/index.html", context)
+        return render(request, "parking/reserve.html", context)
 
     def post(self, request):            
-        get = request.POST.get
-
         form = ReservationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, message="You have successfully reserved your parking")
-        return redirect("home")
+        return redirect("booking")

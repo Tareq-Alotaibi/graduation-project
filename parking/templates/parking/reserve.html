@@ -1,0 +1,162 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'parking/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'parking/normalize.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Smart parking based on Iot</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <!-- Start Header -->
+    <div class="header">
+      <div class="container">
+        <img
+          width="100"
+          class="logo"
+          src="{% static '/parking/pictures/logo.jpg' %}"
+          alt=""
+        />
+        <div class="links">
+          <span class="icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <ul>
+            <li><a href="#ProjectFeatures">ProjectFeatures</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="{% url 'booking' %}">Reserve</a></li>
+            <li><a href="#abstract">abstract</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Header -->
+    <!-- Start Landing Section -->
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <strong>Success!</strong> {{message}}.
+    </div>
+    {% endfor %} {% endif %}
+
+    <!-- Start Portfolio -->
+    <div class="my-5"></div>
+    <div class="ProjectFeatures" id="reserve">
+      <div class="container">
+        <h2 class="special-heading">Booking</h2>
+        <p>Reserve your parking</p>
+        <div class="row">
+          <form action="{% url 'booking' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleInputEmail1">Car Number</label>
+              <input
+                class="form-control"
+                type="text"
+                id="car_number"
+                name="car_number"
+                placeholder="450872115"
+                required
+              />
+              <div class="form-group">
+                <label for="phone">Your Phone</label>
+                <input
+                  class="form-control"
+                  type="tel"
+                  id="phone"
+                  name="phone_number"
+                  placeholder="498-348-3872"
+                  required
+                />
+              </div>
+              <div class="form-group inlined">
+                <label for="checkin-date">Date</label>
+                <input
+                  onblur="checkDate()" 
+                  class="form-control"
+                  type="date"
+                  id="date"
+                  name="date"
+                  required
+                />
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group inlined">
+                    <label for="checkin-date">Checkin</label>
+                    <input
+                      class="form-control"
+                      type="time"
+                      step="1"
+                      id="checkin-date"
+                      name="checkin"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group inlined">
+                    <label for="checkout-date">Checkout</label>
+                    <input
+                      class="form-control"
+                      type="time"
+                      step="1"
+                      id="checkout-date"
+                      name="checkout"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <select
+                name="parking"
+                class="my-3 form-select"
+                aria-label="Default select example"
+              >
+                <option selected>Select Parking</option>
+                {% for parking in parkings %} {% if parking.is_available %}
+                <option value="{{ parking.number }}">{{ parking.name }}</option>
+                {% endif %} {% endfor %}
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Portfolio -->
+    <!-- End Contact -->
+    <!-- Start Footer -->
+    <div class="footer">&copy; 2022 <span>HUP</span> All Right Reserved</div>
+    <!-- End Footer -->
+    <script>
+      function checkDate() {
+        var selectedText = document.getElementById("date").value;
+        var selectedDate = new Date(selectedText);
+        var now = new Date();
+        if (selectedDate < now) {
+          alert("Date must be in the future");
+        }
+      }
+    </script>
+  </body>
+</html>
