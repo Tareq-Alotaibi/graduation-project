@@ -30,4 +30,6 @@ class BookingView(View):
         if form.is_valid():
             form.save()
             messages.success(request, message="You have successfully reserved your parking")
+        else:
+            messages.error(request, message=form.errors['checkout'][0])
         return redirect("booking")

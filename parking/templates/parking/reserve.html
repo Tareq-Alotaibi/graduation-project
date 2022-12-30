@@ -22,6 +22,10 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -52,11 +56,6 @@
     </div>
     <!-- End Header -->
     <!-- Start Landing Section -->
-    {% if messages %} {% for message in messages %}
-    <div class="alert alert-success alert-dismissible" role="alert">
-      <strong>Success!</strong> {{message}}.
-    </div>
-    {% endfor %} {% endif %}
 
     <!-- Start Portfolio -->
     <div class="my-5"></div>
@@ -148,7 +147,8 @@
     <!-- Start Footer -->
     <div class="footer">&copy; 2022 <span>Karajk</span> All Right Reserved</div>
     <!-- End Footer -->
-    <script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <script>
       function checkDate() {
         var selectedText = document.getElementById("date").value;
         var selectedDate = new Date(selectedText);
@@ -157,6 +157,18 @@
           alert("Date must be in the future");
         }
       }
+
+      // display error
+    {% if messages %}
+     {% for message in messages %}
+     {% if message.level_tag == "error" %}
+        toastr.error("{{message}}")
+      {% else %}
+        toastr.success("{{message}}")
+      {% endif %}
+      {% endfor %} 
+    {% endif %}
+
     </script>
 
 
