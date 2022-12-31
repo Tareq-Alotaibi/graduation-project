@@ -13,7 +13,7 @@ class Parking(models.Model):
 
 class Reservation(models.Model):
 
-    parking = models.ForeignKey(Parking, on_delete=models.DO_NOTHING)
+    parking = models.ForeignKey(Parking, on_delete=models.DO_NOTHING, related_name="reservations")
     car_number = models.CharField(max_length=255, null=True, blank=True)
     phone_number = models.CharField(null=True, max_length=60)
     date = models.DateField(null=True, blank=True)
