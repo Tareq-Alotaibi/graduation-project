@@ -149,11 +149,17 @@
     <!-- End Footer -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <script>
+      Date.prototype.withoutTime = function () {
+          var d = new Date(this);
+          d.setHours(0, 0, 0, 0);
+          return d;
+      }
+
       function checkDate() {
         var selectedText = document.getElementById("date").value;
         var selectedDate = new Date(selectedText);
         var now = new Date();
-        if (selectedDate < now) {
+        if (selectedDate.withoutTime() < now.withoutTime()) {
           alert("Date must be in the future");
         }
       }
