@@ -8,7 +8,7 @@ class Parking(models.Model):
     is_available = models.BooleanField(default=True, null=True)
 
     def __str__(self) -> str:
-        return f"Parking number {str(self.name)}"
+        return f"Parking {str(self.name)}"
 
 
 class Reservation(models.Model):

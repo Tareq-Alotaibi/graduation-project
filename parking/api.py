@@ -6,7 +6,7 @@ from datetime import datetime
 def get_available(request):
     now = datetime.now()
     off_parkings = Parking.objects.filter(
-        reservations__date__gte=now.date(), 
+        reservations__date=now.date(), 
         reservations__checkin__lte=now.time(), 
         reservations__checkout__gt=now.time(),
     )
