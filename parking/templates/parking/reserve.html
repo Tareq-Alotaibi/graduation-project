@@ -156,11 +156,12 @@
       }
 
       function checkDate() {
-        var selectedText = document.getElementById("date").value;
-        var selectedDate = new Date(selectedText);
+        var selectedText = document.getElementById("date");
+        var selectedDate = new Date(selectedText.value);
         var now = new Date();
         if (selectedDate.withoutTime() < now.withoutTime()) {
           alert("Date must be in the future");
+          selectedText.value = null;
         }
       }
 
